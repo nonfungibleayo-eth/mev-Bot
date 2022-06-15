@@ -1,11 +1,11 @@
 /// SPDX-License-Identifier: UNLICENSED;
 pragma solidity =0.6.6;
 
-import '@uniswap/v2-periphery/contracts/libraries/UniswapV2Library.sol';
-import '@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol';
-import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol';
-import '@uniswap/v2-core/contracts/interfaces/IERC20.sol';
-import '@uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol';
+import './UniswapV2Library.sol';
+import './interfaces/IUniswapV2Router02.sol';
+import './interfaces/IUniswapV2Pair.sol';
+import './interfaces/IERC20.sol';
+import './interfaces/IUniswapV2Factory.sol';
 
 
 
