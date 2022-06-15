@@ -16,9 +16,9 @@ contract flashLoan {
     uint constant deadline = 10 days;
     IUniswapV2Router02 immutable sushirouter;
 
-    address private constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
+    
 
-    constructor(address _factory, address _unirouter, address _sushirouter) public {
+    constructor(address _factory, address _sushirouter) public {
         factory = _factory;
         sushirouter = IUniswapV2Router02(_sushirouter);
     }
