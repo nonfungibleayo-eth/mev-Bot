@@ -16,12 +16,12 @@ contract flashLoan {
     uint constant deadline = 10 days;
     IUniswapV2Router02 immutable sushirouter;
 
-    
-
-    constructor(address _factory, address _sushirouter) public {
+    constructor(address _sushirouter, address _factory) public {
         factory = _factory;
         sushirouter = IUniswapV2Router02(_sushirouter);
     }
+
+    address private constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
 
     function flashSwap(address _tokenBorrow, uint amount) external {
         address pair = IUniswapV2Factory(factory).getPair(_tokenBorrow, WETH);
@@ -33,10 +33,12 @@ contract flashLoan {
         uint amount0 = _tokenBorrow == token0 ? amount : 0;
         uint amount1 = _tokenBorrow == token1 ? amount : 0; 
 
-        IUniswapV2Pair(pair).swap(amount0, amount1, address(this), "");
+        bytes memory data = abi.encode(_tokenBorrow, amount);
+
+        IUniswapV2Pair(pair).swap(amount0, amount1, address(this), data);
     }
 
-    function UniswapV2Call(address _sender, uint _amount0, uint _amount1, bytes calldata data) external {
+    function UniswapV2Call(address _sender, uint _amount0, uint _amount1, bytes calldata _data) external {
 
         address[] memory path = new address[] (2);
         uint amountToken = _amount0 == 0 ? _amount1 : _amount0;
